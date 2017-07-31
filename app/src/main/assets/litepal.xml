@@ -5,9 +5,9 @@
     <version value="1" />
 
     <list>
-         <mapping class="com.example.wow.coolweather.android.db.Province" />
-         <mapping class="com.example.wow.coolweather.android.db.City" />
-         <mapping class="com.example.wow.coolweather.android.db.County" />
+         <mapping class="com.example.wow.coolweather.db.Province" />
+         <mapping class="com.example.wow.coolweather.db.City" />
+         <mapping class="com.example.wow.coolweather.db.County" />
     </list>
 
 </litepal>
