@@ -2,6 +2,7 @@ package com.example.wow.coolweather.util;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Created by wow on 2017/7/30.

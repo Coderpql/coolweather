@@ -2,6 +2,9 @@ package com.example.wow.coolweather;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,9 +20,11 @@ import android.widget.Toast;
 import com.example.wow.coolweather.db.City;
 import com.example.wow.coolweather.db.County;
 import com.example.wow.coolweather.db.Province;
+import com.example.wow.coolweather.gson.Weather;
 import com.example.wow.coolweather.util.HttpUtil;
 import com.example.wow.coolweather.util.Utility;
 
+import org.litepal.LitePalApplication;
 import org.litepal.crud.DataSupport;
 
 import java.io.IOException;
@@ -34,7 +39,7 @@ import okhttp3.Response;
  * Created by wow on 2017/7/31.
  */
 
-public class ChooseAreaFragment extends Fragment  {
+public class ChooseAreaFragment extends BaseFragment  {
 
     public static final int LEVEL_PROVINCE = 0;
     public static final int LEVEL_CITY = 1;
@@ -76,13 +81,18 @@ public class ChooseAreaFragment extends Fragment  {
      */
     private int currentLevel;
 
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.choose_area,container,false);
         titleText = (TextView)view.findViewById(R.id.title_text);
         backButton = (Button)view.findViewById(R.id.back_button);
         listView = (ListView)view.findViewById(R.id.list_view);
-        adapter = new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,datalist);
+        adapter = new ArrayAdapter<>(getActivity().getApplication(),android.R.layout.simple_list_item_1,datalist);
         listView.setAdapter(adapter);
         return view;
     }
@@ -99,6 +109,12 @@ public class ChooseAreaFragment extends Fragment  {
                 }else if (currentLevel == LEVEL_CITY){
                     selectedCity = cityList.get(position);
                     queryCounties();
+                }else if (currentLevel == LEVEL_COUNTY){
+                    String weatherId = countyList.get(position).getWeatherId();
+                    Intent intent = new Intent(getActivity(), WeatherActivity.class);
+                    intent.putExtra("weather_id",weatherId);
+                    startActivity(intent);
+                    getActivity().finish();
                 }
             }
         });
