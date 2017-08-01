@@ -1,5 +1,6 @@
 package com.example.wow.coolweather;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.wow.coolweather.gson.Forecast;
 import com.example.wow.coolweather.gson.Weather;
+import com.example.wow.coolweather.service.MyService;
 import com.example.wow.coolweather.util.HttpUtil;
 import com.example.wow.coolweather.util.Utility;
 
@@ -234,5 +236,7 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
+        Intent intent = new Intent(this, MyService.class);
+        startService(intent);
     }
 }
