@@ -3,7 +3,8 @@
     android:orientation="vertical" 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF8000">
+    android:background="#FF8000"
+    android:fitsSystemWindows="true">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
