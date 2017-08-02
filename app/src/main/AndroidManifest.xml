@@ -23,7 +23,12 @@
         <service
             android:name=".service.MyService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity android:name=".SettingActivity"
+            android:launchMode="singleInstance">
+
+        </activity>
     </application>
 
 </manifest>

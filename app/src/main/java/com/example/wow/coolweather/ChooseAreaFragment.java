@@ -21,6 +21,7 @@ import com.example.wow.coolweather.db.City;
 import com.example.wow.coolweather.db.County;
 import com.example.wow.coolweather.db.Province;
 import com.example.wow.coolweather.gson.Weather;
+import com.example.wow.coolweather.service.MyService;
 import com.example.wow.coolweather.util.HttpUtil;
 import com.example.wow.coolweather.util.Utility;
 

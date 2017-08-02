@@ -35,9 +35,9 @@ public class MyService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         updateWeather();
         updateBingPic();
-        Log.d("Service","创建成功");
+        Log.d("Service","开启自动更新");
         AlarmManager manager = (AlarmManager)getSystemService(ALARM_SERVICE);
-        int anhour = 8*60*60*1000;
+        int anhour = 2*60*60*1000;
         long updateTime = SystemClock.elapsedRealtime() + anhour ;
         Intent in = new Intent(this,MyService.class);
         PendingIntent pi = PendingIntent.getService(this,0,in,0);
@@ -97,5 +97,11 @@ public class MyService extends Service {
                 editor.apply();
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d("Service","关闭自动更新");
     }
 }

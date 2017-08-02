@@ -26,6 +26,7 @@ import com.example.wow.coolweather.gson.Weather;
 import com.example.wow.coolweather.service.MyService;
 import com.example.wow.coolweather.util.HttpUtil;
 import com.example.wow.coolweather.util.Utility;
+import com.github.glomadrian.materialanimatedswitch.MaterialAnimatedSwitch;
 
 import org.w3c.dom.Text;
 
@@ -69,6 +70,9 @@ public class WeatherActivity extends AppCompatActivity {
     public Button navButton;
 
     public  String weatherId;
+
+    private Button settingButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +100,14 @@ public class WeatherActivity extends AppCompatActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navButton = (Button) findViewById(R.id.nav_button);
         swipeRefresh = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh);
+        settingButton = (Button) findViewById(R.id.setting);
+        settingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WeatherActivity.this,SettingActivity.class);
+                startActivity(intent);
+            }
+        });
         navButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,6 +132,7 @@ public class WeatherActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 requestWeather(weatherId);
+                loadBingPic();
             }
         });
         String bingPic = prefs.getString("bing_pic",null);
@@ -236,7 +249,6 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
-        Intent intent = new Intent(this, MyService.class);
-        startService(intent);
+
     }
 }
