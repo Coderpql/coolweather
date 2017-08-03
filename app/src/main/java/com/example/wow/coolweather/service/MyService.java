@@ -33,11 +33,14 @@ public class MyService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.d("Service","开启自动更新");
         updateWeather();
         updateBingPic();
-        Log.d("Service","开启自动更新");
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        Long anHour = prefs.getLong("updateTime",0);
+        Log.d("service",anHour.toString());
         AlarmManager manager = (AlarmManager)getSystemService(ALARM_SERVICE);
-        int anhour = 2*60*60*1000;
+        Long anhour = anHour*60*60*1000;
         long updateTime = SystemClock.elapsedRealtime() + anhour ;
         Intent in = new Intent(this,MyService.class);
         PendingIntent pi = PendingIntent.getService(this,0,in,0);

@@ -117,6 +117,11 @@ public class WeatherActivity extends AppCompatActivity {
         swipeRefresh.setColorSchemeResources(R.color.colorPrimary);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String weatherString = prefs.getString("weather",null);
+        boolean check = prefs.getBoolean("isChecked",false);
+        if (check != false){
+            Intent intent = new Intent(WeatherActivity.this, MyService.class);
+            startService(intent);
+        }
         if (weatherString != null){
             //有缓存时直接解析天气数据
             Weather weather = Utility.handleWeatherResponse(weatherString);
